@@ -1,63 +1,94 @@
-# ISHIP-PROJECT
-## Cross-VPC EC2 Communication in Same Region
-### 1. Creating Two VPCs:
-###  <ul><li>	Set up two separate Virtual Private Clouds (VPCs) to isolate resources.</li></ul>
+# ISHIP-PROJECT-2
+## StudentVault: A Serverless API for Student Management
+### 1. Create DynamoDB Table:
+### <ul><li> Created a table in DynamoDB for storing student information. </li></ul>
 <p align="center">
-  <img src="https://github.com/22MH1A42G5/ISHIP-PROJECT/blob/main/visuals/1.jpg" width="700" height="400">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/1.png" width="700" height="400">
 </p>
 
-### 2. Creating Subnets:
-### <ul><li> Create one public subnet and one private subnet within each VPC.</li></ul>
+
+### 2. Create Lambda Function:
+### <ul><li> Created a Lambda function named serverless-api using Python. </li></ul>
 <p align="center">
-  <img src="https://github.com/22MH1A42G5/ISHIP-PROJECT/blob/main/visuals/3.jpg" width="700" height="400">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/2.png" width="700" height="400">
 </p>
 
-### 3. Creating Route Tables:
-### <ul> <li>Configure two route tables in each VPC, one for the public subnet and one for the private subnet.</li></ul>
+### <ul><li> Created a new role named serverless-api-role for the Lambda function. </li></ul>
 <p align="center">
-  <img src="https://github.com/22MH1A42G5/ISHIP-PROJECT/blob/main/visuals/4.jpg" width="700" height="400">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/3.png" width="700" height="400">
 </p>
 
-### 4. Creating Internet Gateways:
-### <ul style="list-style-type: square"> <li>	Attach an Internet Gateway to each VPC and associate it with the public subnet to enable internet connectivity.</li></ul>
+### 3. Write Lambda Code:
+### <ul><li> Implemented Lambda code to handle CRUD operations with DynamoDB.</li></ul>
 <p align="center">
-  <img src="https://github.com/22MH1A42G5/ISHIP-PROJECT/blob/main/visuals/5.jpg" width="700" height="400">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/6.png" width="700" height="400">
 </p>
 
-### 5. Creating Peering Connection:
-### <ul><li>	Establish a VPC peering connection between the two VPCs to enable communication.</li></ul>
+### 4. Set Up API Gateway:
+### <ul><li> Created a new REST API named StudentVault-API. </li></ul>
 <p align="center">
-  <img src="https://github.com/22MH1A42G5/ISHIP-PROJECT/blob/main/visuals/6.jpg" width="700" height="400">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/4.png" width="700" height="400">
 </p>
 
-### 6. Resource Map:
-###	<ul><li>Map the associations between the public and private subnets, route tables, and Internet Gateway connections in First VPC. </li></ul>
+### <ul><li> Added resources and methods for POST, GET, PUT, and DELETE. </li></ul>
 <p align="center">
-  <img src="https://github.com/22MH1A42G5/ISHIP-PROJECT/blob/main/visuals/7.jpg" width="700" height="400">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/5.png" width="700" height="400">
 </p>
 
-###	<ul><li>Map the associations between the public and private subnets, route tables, and Internet Gateway connections in Second VPC. </li></ul>
+### <ul><li> Integrated each API Gateway method with the serverless-api Lambda function. </li></ul>
 <p align="center">
-  <img src="https://github.com/22MH1A42G5/ISHIP-PROJECT/blob/main/visuals/8.jpg" width="700" height="400">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/7.png" width="700" height="400">
 </p>
 
-### 7. Creating Public EC2 Instances via Cloud9:
-### <ul><li>Launch public EC2 instances in each VPC using the AWS Cloud9 service for development purposes.</li></ul>
+### 5. Update Lambda Role:
+### <ul><li> Updated the serverless-api-role to include the following policies: <ul> <li>AmazonDynamoDBFullAccess (to allow full access to DynamoDB). </li> <li> CloudWatchLogsFullAccess (to allow logging for debugging and monitoring). </li></ul></li></ul>
 <p align="center">
-  <img src="https://github.com/22MH1A42G5/ISHIP-PROJECT/blob/main/visuals/9.jpg" width="700" height="400">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/8.png" width="700" height="400">
 </p>
 
-### 8. Accessing Public and Creating Private EC2 Instances:
-### <ul><li> Access the public EC2 instances launched from Cloud9. Then, create private EC2 instances within the EC2 service in each VPC. </li></ul>
+### 6. Test POST Method in API Gateway Console:
+### <ul><li> Used the API Gateway test console to verify that the POST method correctly adds items to DynamoDB </li></ul>
 <p align="center">
-  <img src="https://github.com/22MH1A42G5/ISHIP-PROJECT/blob/main/visuals/10.jpg" width="700" height="400">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/9.png" width="700" height="400">
 </p>
 
-### 9. Connecting Private EC2 Instances:
-### <ul><li>Use the public EC2 instances as bastions to connect to the private EC2 instances, and access them through the Cloud9 service.</li></ul>
+### <ul><li> Checked the DynamoDB table to confirm that the new item was successfully added. </li></ul>
 <p align="center">
-  <img src="https://github.com/22MH1A42G5/ISHIP-PROJECT/blob/main/visuals/11.jpg" width="700" height="400">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/10.png" width="700" height="400">
 </p>
 
-### 10. Video Link
-<ul> <li><a href="https://adityagroup-my.sharepoint.com/personal/22mh1a42g5_acoe_edu_in/_layouts/15/stream.aspx?id=%2Fpersonal%2F22mh1a42g5%5Facoe%5Fedu%5Fin%2FDocuments%2FISHIP%2FIship%2Dproject%2Emp4&ga=1&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2Ef3e4c261%2Df201%2D463e%2Db6dd%2D5619e70822dd">Project-demo.mp4</a></li></ul>
+### 7. Deploy API:
+### <ul><li> Deployed the API to a new stage named prod. </li></ul>
+<p align="center">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/11.png" width="700" height="400">
+</p>
+
+### 8. Test API with Postman:
+### <ul><li> Used Postman to test the API functionality. </li></ul>
+### <ul><li> GET method: Retrieve all student records from DynamoDB. </li></ul>
+<p align="center">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/12.png" width="700" height="400">
+</p>
+
+### <ul><li> POST method: Add a new student record to DynamoDB. </li></ul>
+<p align="center">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/13.png" width="700" height="400">
+</p>
+
+### <ul><li> GET method with RollNo in the path: Retrieve a specific student's information using their RollNo. </li></ul>
+<p align="center">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/14.png" width="700" height="400">
+</p>
+
+### <ul><li> PUT method: Update a specific student's information in DynamoDB. </li></ul>
+<p align="center">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/15.png" width="700" height="400">
+</p>
+
+### <ul><li> DELETE method: Remove a student record from DynamoDB. </li></ul>
+<p align="center">
+  <img src="https://github.com/22MH1A42G5/cloud-projects/blob/main/aws-iship2-project/images/16.png" width="700" height="400">
+</p>
+
+
+
